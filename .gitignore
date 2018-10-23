@@ -1,0 +1,9 @@
+build/**/*.*
+node_modules
+!build/firefox/*/.gitkeep
+!build/chrome/*/.gitkeep
+src/chrome/ls/firebase-config.ls
+src/firefox/ls/firebase-config.ls
+package-lock.json
+test-code/*
+*~

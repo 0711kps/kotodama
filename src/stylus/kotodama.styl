@@ -1,0 +1,16 @@
+bg-mask-color = hsla(0, 0%, 0%, 0.8)
+
+#kotodama-screen
+  display: none
+  background-color: transparent
+  width: 100vw
+  height: 100vh
+  position: fixed
+  left: 0
+  top: 0
+  z-index: 100
+  transition: background-color 200ms
+  &.activated
+    background-color: bg-mask-color
+  &.exist
+    display: block

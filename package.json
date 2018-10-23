@@ -1,0 +1,20 @@
+{
+  "name": "kotodama",
+  "version": "0.1.7",
+  "description": "share current thoughts or feeling on any web page.",
+  "main": "index.js",
+    "scripts": {
+      "build": "lsc task/build.ls",
+      "build-firefox": "lsc task/build.ls -firefox",
+      "build-chrome": "lsc task/build.ls -chrome"
+  },
+  "keywords": [],
+  "author": "0711kps@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "livescript": "^1.6.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "shelljs": "^0.8.2",
+    "stylus": "^0.54.5"
+  }
+}
