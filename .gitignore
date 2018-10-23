@@ -1,0 +1,7 @@
+build/*
+node_modules
+!build/.gitkeep
+!build/images
+package-lock.json
+test-code/*
+*.*~

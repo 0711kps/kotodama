@@ -1,0 +1,20 @@
+{
+    "name": "kotodama",
+    "version": "0.1",
+    "description": "share your current thoughts or feeling on any web page.",
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": ["https://www.google.com.tw/", "webRequest"],
+    "icons": {
+        "16": "images/logo-16.png",
+        "32": "images/logo-32.png",
+        "48": "images/logo-48.png",
+        "128": "images/logo-128.png"
+    },
+    "browser_action": {
+        "default_icon": "images/logo-32.png",
+        "default_title": "kotodama"
+    },
+    "manifest_version": 2
+}
