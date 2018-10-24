@@ -1,7 +1,7 @@
-build/*
+build/*.*
 node_modules
-!build/.gitkeep
-!build/images
+!build/firefox/*/.gitkeep
+!build/chrome/*/.gitkeep
 package-lock.json
 test-code/*
 *.*~

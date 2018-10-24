@@ -4,7 +4,8 @@
   "description": "share current thoughts or feeling on any web page.",
   "main": "index.js",
   "scripts": {
-    "build-chr": "lsc build-chr.ls",
+      "build-firefox": "lsc task/build.ls -firefox",
+      "build-chrome": "lsc task/build.ls -chrome"
   },
   "keywords": [],
   "author": "0711kps@gmail.com",
