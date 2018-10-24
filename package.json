@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "share current thoughts or feeling on any web page.",
   "main": "index.js",
-  "scripts": {
+    "scripts": {
+      "build": "lsc task/build.ls",
       "build-firefox": "lsc task/build.ls -firefox",
       "build-chrome": "lsc task/build.ls -chrome"
   },
