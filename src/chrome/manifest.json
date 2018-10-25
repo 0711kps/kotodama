@@ -1,14 +1,14 @@
 {
     "name": "kotodama",
-    "version": "0.1",
+    "version": "0.1.2",
     "description": "share your current thoughts or feeling on any web page.",
     "background": {
-        "scripts": ["js/background.js"],
+        "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/firebase-config.js", "js/background.js"],
         "persistent": false
     },
-    "permissions": ["https://www.google.com.tw/"],
-    "page_action": {
-        "default_popup": "popup.html",
+    "permissions": ["https://kotodama-0711.firebaseio.com/", "activeTab"],
+    "browser_action": {
+        "default_popup": "html/popup.html",
         "default_icon": {
             "16": "images/logo-16.png",
             "32": "images/logo-32.png",

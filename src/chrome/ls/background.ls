@@ -1,10 +1,7 @@
-chrome.runtime.on-installed.add-listener !->
-  xhr = new XML-http-request!
-  xhr.open 'GET' 'https://www.google.com.tw'
-  xhr.onload = !->
-    if xhr.status == 200
-      console.log "get something from google"
-      console.log xhr
-    else
-      console.log "fail ajax"
-  xhr.send!
+firebase.initializeApp(config)
+
+send-kotodama = (req, sender, send-res) !->
+  firebase.database!.ref(req.url).push req.msg
+  send-res true
+
+chrome.runtime.on-message.add-listener send-kotodama
