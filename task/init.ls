@@ -11,17 +11,29 @@ src =
     ls: path.join "src", "chrome", "ls"
   pug: path.join "src", "pug"
   stylus: path.join "src", "stylus"
+  images: path.join "src", "images"
 build =
   firefox:
-    css: path.join "build", "firefox", "css"
-    html: path.join "build", "firefox", "html"
-    js: path.join "build", "firefox", "js"
+    css: "css"
+    html: "html"
+    js: "js"
+    images: "images"
+    manifest: "manifest.json"
   chrome:
-    css: path.join "build", "chrome", "css"
-    html: path.join "build", "chrome", "html"
-    js: path.join "build", "chrome", "js"
+    css: "css"
+    html: "html"
+    js: "js"
+    images: "images"
+    manifest: "manifest.json"
+for key1, obj of build
+  for key2, val of obj
+    obj[key2] = path.join "build", key1, val
+  
 bin =
-  lsc: path.join "node_modules", ".bin", "lsc -c"
-  pug: path.join "node_modules", ".bin", "pug"
+  lsc: "lsc -c"
+  pug: "pug"
+  stylus: "stylus"
+for key, val of bin
+  bin[key] = path.join "node_modules", ".bin", val
 
 export src, build, bin
