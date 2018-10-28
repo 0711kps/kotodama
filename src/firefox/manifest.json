@@ -1,6 +1,6 @@
 {
     "name": "kotodama",
-    "version": "0.1",
+    "version": "0.1.2",
     "description": "share your current thoughts or feeling on any web page.",
     "background": {
         "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/background.js"]
