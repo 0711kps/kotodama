@@ -30,7 +30,7 @@ for key1, obj of build
     obj[key2] = path.join "build", key1, val
   
 bin =
-  lsc: "lsc -c"
+  lsc: "lsc -c -b"
   pug: "pug"
   stylus: "stylus"
 for key, val of bin

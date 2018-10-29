@@ -1,4 +1,4 @@
-firebase.initializeApp(config)
+firebase.initializeApp(config!)
 
 send-kotodama = (req, sender, send-res) !->
   firebase.database!.ref(req.url).push req.msg
