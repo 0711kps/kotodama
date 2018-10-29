@@ -1,9 +1,9 @@
 {
     "name": "kotodama",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "share your current thoughts or feeling on any web page.",
     "background": {
-        "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/firebase-config.js", "js/background.js"],
+        "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/firebase-config.js", "js/third-js/md5.min.js", "js/background.js"],
         "persistent": false
     },
     "permissions": ["https://kotodama-0711.firebaseio.com/", "activeTab"],

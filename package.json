@@ -1,6 +1,6 @@
 {
   "name": "kotodama",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "share current thoughts or feeling on any web page.",
   "main": "index.js",
     "scripts": {

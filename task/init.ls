@@ -12,6 +12,7 @@ src =
   pug: path.join "src", "pug"
   stylus: path.join "src", "stylus"
   images: path.join "src", "images"
+  third-js: path.join "src", "third-js"
 build =
   firefox:
     css: "css"

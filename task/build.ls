@@ -27,6 +27,8 @@ build-common = !->
   exec "cp -rf #{src.chrome.manifest} #{build.chrome.manifest}"
   exec "cp -rf #{src.images} #{build.chrome.images}"
   exec "cp -rf #{src.images} #{build.firefox.images}"
+  exec "cp -rf #{src.third-js} #{build.chrome.js}"
+  exec "cp -rf #{src.third-js} #{build.firefox.js}"
   each-src (file) !->
     compile-pug file
   , get-src, "pug"
