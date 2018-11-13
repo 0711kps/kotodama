@@ -1,7 +1,10 @@
 firebase.initializeApp(config)
 
 send-kotodama = (req, sender, send-res) !->
+  console.log "see me ?"
   url-hash = md5 req.url
+  console.log req.url
+  console.log url-hash
   firebase.database!.ref(url-hash).push req.msg, (error) !->
     if error
       console.log "something wrong happened!"
