@@ -6,7 +6,7 @@
         "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/firebase-config.js", "js/third-js/md5.min.js", "js/background.js"],
         "persistent": false
     },
-    "permissions": ["https://kotodama-0711.firebaseio.com/", "activeTab"],
+    "permissions": ["https://kotodama-0711.firebaseio.com/", "tabs", "activeTab"],
     "browser_action": {
         "default_popup": "html/popup.html",
         "default_icon": {

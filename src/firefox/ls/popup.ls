@@ -9,5 +9,5 @@ k-field.add-event-listener 'keypress', (e) ->
   if e.key-code == 13
     browser.tabs.query active: true, current-window: true , (tabs) !->
       url = tabs.0.url.replace(/(https?:\/\/)|\.|\//g,'')
-      sending = browser.runtime.send-message msg: e.target.value, url: url
+      sending = browser.runtime.send-message msg: e.target.value, url: url, tab-id: tabs.0.id
       sending.then(h-res, h-err)
