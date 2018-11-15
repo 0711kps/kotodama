@@ -1,7 +1,10 @@
 doctype html
-html()
+html
   head
     meta(charset="UTF-8")
+    link(rel="stylesheet" href="../css/popup.css")
     script(src="../js/popup.js" defer)
   body
-    input#k-field(type='text' placeholder='your kotodama here')
+    img#kotodama-off.kotodama-switch(src="../images/off.png" draggable="false")
+    img#kotodama-on.kotodama-switch(src="../images/on.png" draggable="false")
+    input#kotodama-field(type='text' placeholder='click')
