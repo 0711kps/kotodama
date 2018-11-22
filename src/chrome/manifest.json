@@ -1,12 +1,12 @@
 {
     "name": "kotodama",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "share your current thoughts or feeling on any web page.",
     "background": {
         "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/firebase-config.js", "js/third-js/md5.min.js", "js/background.js"],
         "persistent": false
     },
-    "permissions": ["https://kotodama-0711.firebaseio.com/", "tabs", "activeTab"],
+    "permissions": ["https://kotodama-0711.firebaseio.com/", "tabs", "activeTab", "storage"],
     "browser_action": {
         "default_popup": "html/popup.html",
         "default_icon": {
@@ -16,5 +16,6 @@
             "128": "images/logo-128.png"
         }
     },
-    "manifest_version": 2
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self'; object-src 'self'"
 }
