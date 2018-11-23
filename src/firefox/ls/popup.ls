@@ -13,9 +13,13 @@ init-kotodama-switch = !->
         
 send-kotodama = (e) !->
   if e.key-code == 13
+    e.target.set-attribute 'disabled', true
     browser.tabs.query active: true, current-window: true , (tabs) !->
       url = tabs.0.url.replace(/https?:\/\/|\.|\/|www|#/g,'')
       browser.runtime.send-message {msg: e.target.value, url: url, tab-id: tabs.0.id}
+        .then (obj) !->
+          e.target.remove-attribute 'disabled'
+          e.target.value = ''
       
 expand-field = (e) !->
   k-field.class-list.add 'activated'

@@ -10,11 +10,15 @@ init-kotodama-switch = !->
         k-on.class-list.add \activated
       else
         k-off.class-list.add \activated
+        
 send-kotodama = (e) !->
   if e.key-code == 13
+    e.target.set-attribute 'disabled', true
     chrome.tabs.query active: true, current-window: true , (tabs) !->
       url = tabs.0.url.replace(/https?:\/\/|\.|\/|www|#/g,'')
-      sending = chrome.runtime.send-message {msg: e.target.value, url: url, tab-id: tabs.0.id}
+      chrome.runtime.send-message {msg: e.target.value, url: url, tab-id: tabs.0.id}, !->
+        e.target.remove-attribute 'disabled'
+        e.target.value = ''
 
 expand-field = (e) !->
   k-field.class-list.add 'activated'
