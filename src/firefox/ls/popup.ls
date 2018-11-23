@@ -20,6 +20,7 @@ send-kotodama = (e) !->
         .then (obj) !->
           e.target.remove-attribute \disabled
           e.target.value = ''
+          e.target.focus!
       
 expand-field = (e) !->
   k-field.class-list.add \activated

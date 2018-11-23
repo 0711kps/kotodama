@@ -19,6 +19,7 @@ send-kotodama = (e) !->
       chrome.runtime.send-message {msg: e.target.value, url: url, tab-id: tabs.0.id}, !->
         e.target.remove-attribute \disabled
         e.target.value = ''
+        e.target.focus!
 
 expand-field = (e) !->
   k-field.class-list.add \activated
