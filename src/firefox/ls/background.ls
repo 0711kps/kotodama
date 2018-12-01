@@ -20,6 +20,10 @@ handle-kotodama-badge = (amount, tab-id) !->
 handle-message = (req, sender, send-res) !->
   if req.type == 1
     send-kotodama req, send-res
+  else if req.type == 2
+    tab-id = sender.tab.id
+    browser.storage.local.get tab-id.to-string! .then (obj) !->
+      browser.tabs.send-message tab-id, obj[tab-id.to-string!].msgs
 
 send-kotodama = (req, send-res) !->
   url-hash = md5 req.url
