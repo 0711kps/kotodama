@@ -16,8 +16,12 @@ handle-kotodama-badge = (amount, tab-id) !->
       badge-str = \xxx
   chrome.browser-action.set-badge-text text: badge-str, tab-id: tab-id
   chrome.browser-action.set-badge-background-color color: badge-color, tab-id: tab-id
-  
-send-kotodama = (req, sender, send-res) !->
+
+handle-message = (req, sender, send-res) !->
+  if req.type == 1
+    send-kotodama req, send-res
+
+send-kotodama = (req, send-res) !->
   url-hash = md5 req.url
   firebase.database!.ref(url-hash).push req.msg, (error) !->
     if error
@@ -25,7 +29,7 @@ send-kotodama = (req, sender, send-res) !->
     else
       get-kotodama req.url, req.tab-id
   send-res true
-  
+
 get-kotodama = (url, tab-id) !->
   url-hash = md5 url.replace /(https?:|[./#&?+=]|www)/g, ''
   firebase.database!.ref(url-hash).once \value .then (snapshot) !->
@@ -44,7 +48,7 @@ get-kotodama = (url, tab-id) !->
 remove-local-kotodama = (tab-id) !->
   chrome.storage.local.remove tab-id.to-string!
 
-chrome.runtime.on-message.add-listener send-kotodama
+chrome.runtime.on-message.add-listener handle-message
 chrome.tabs.on-updated.add-listener (tab-id, change-info, tab) !->
   if change-info.status == \loading
     url = tab.url
