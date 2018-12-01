@@ -17,7 +17,15 @@ handle-kotodama-badge = (amount, tab-id) !->
   browser.browser-action.set-badge-text text: badge-str, tab-id: tab-id
   browser.browser-action.set-badge-background-color color: badge-color, tab-id: tab-id
 
-send-kotodama = (req, sender, send-res) !->
+handle-message = (req, sender, send-res) !->
+  if req.type == 1
+    send-kotodama req, send-res
+  else if req.type == 2
+    tab-id = sender.tab.id
+    browser.storage.local.get tab-id.to-string! .then (obj) !->
+      browser.tabs.send-message tab-id, obj[tab-id.to-string!].msgs
+
+send-kotodama = (req, send-res) !->
   url-hash = md5 req.url
   firebase.database!.ref(url-hash).push req.msg, (error) !->
     if error
@@ -44,7 +52,7 @@ get-kotodama = (url, tab-id) !->
 remove-local-kotodama = (tab-id) !->
   browser.storage.local.remove tab-id.to-string!
 
-browser.runtime.on-message.add-listener send-kotodama
+browser.runtime.on-message.add-listener handle-message
 browser.tabs.on-updated.add-listener (tab-id, change-info, tab) !->
   if change-info.status == \loading
     url = tab.url

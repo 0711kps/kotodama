@@ -16,7 +16,7 @@ send-kotodama = (e) !->
     e.target.set-attribute \disabled, true
     chrome.tabs.query active: true, current-window: true , (tabs) !->
       url = tabs.0.url.replace /(https?:|[./#&?+=]|www)/g, ''
-      chrome.runtime.send-message {msg: e.target.value, url: url, tab-id: tabs.0.id}, !->
+      chrome.runtime.send-message type: 1, msg: e.target.value, url: url, tab-id: tabs.0.id, !->
         e.target.remove-attribute \disabled
         e.target.value = ''
         e.target.focus!
