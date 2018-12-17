@@ -1,15 +1,20 @@
 firebase.initializeApp(config)
 
+initialize-extension = !->
+  browser.storage.local.clear
+  extension-options = ng-list: false, colorful-kotodama: true
+  browser.storage.local.set extension-options
+
 handle-kotodama-badge = (amount, tab-id) !->
   badge-str = amount.to-string!
   if amount < 10
-    badge-color = 'hsla(220, 100%, 40%, 0.4)'
+    badge-color = "hsla(220, 100%, 40%, 0.4)"
   else if amount < 100
-    badge-color = 'hsla(120, 100%, 40%, 0.4)'
+    badge-color = "hsla(120, 100%, 40%, 0.4)"
   else if amount < 1000
-    badge-color = 'hsla(50, 100%, 40%, 0.4)'
+    badge-color = "hsla(50, 100%, 40%, 0.4)"
   else
-    badge-color = 'hsla(0, 100%, 40%, 0.4)'
+    badge-color = "hsla(0, 100%, 40%, 0.4)"
     if amount < 1000000
       badge-str = Math.floor amount / 1000 .to-string! + \k
     else
@@ -35,7 +40,7 @@ send-kotodama = (req, send-res) !->
   send-res true
 
 get-kotodama = (url, tab-id) !->
-  url-hash = md5 url.replace /(https?:|[./#&?+=]|www)/g, ''
+  url-hash = md5 url.replace /(https?:|[./#&?+=]|www)/g, ""
   firebase.database!.ref(url-hash).once \value .then (snapshot) !->
     msgs = snapshot.val!
     msgs-arr = []
@@ -49,13 +54,21 @@ get-kotodama = (url, tab-id) !->
     tab-info[tab-id] = tab-obj
     browser.storage.local.set tab-info
 
-remove-local-kotodama = (tab-id) !->
+remove-tab-cache = (tab-id) !->
   browser.storage.local.remove tab-id.to-string!
 
+remove-window-cache = (window-id) !->
+  browser.tabs.query window-id: window-id, (tabs) !->
+    tab-ids = tabs.map (tab) -> tab.id.to-string!
+    tab-ids.for-each (tab-id) !->
+      browser.storage.local.remove tab-id
+
+browser.runtime.on-installed.add-listener initialize-extension
 browser.runtime.on-message.add-listener handle-message
 browser.tabs.on-updated.add-listener (tab-id, change-info, tab) !->
   if change-info.status == \loading
     url = tab.url
     if url.match /^https?:\/\/(\w|-)+(\.\w+){1,4}\//
       get-kotodama(url, tab-id)
-browser.tabs.on-removed.add-listener remove-local-kotodama
+browser.tabs.on-removed.add-listener remove-tab-cache
+browser.windows.on-removed.add-listener remove-window-cache
