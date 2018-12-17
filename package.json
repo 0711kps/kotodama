@@ -1,20 +1,22 @@
 {
   "name": "kotodama",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "share current thoughts or feeling on any web page.",
   "main": "index.js",
-    "scripts": {
-      "build": "lsc task/build.ls",
-      "build-firefox": "lsc task/build.ls -firefox",
-      "build-chrome": "lsc task/build.ls -chrome"
+  "scripts": {
+    "watch": "node watch.js",
+    "build": "lsc task/build.ls",
+    "build-firefox": "lsc task/build.ls -firefox",
+    "build-chrome": "lsc task/build.ls -chrome"
   },
   "keywords": [],
   "author": "0711kps@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "csso": "^3.5.1",
     "livescript": "^1.6.0",
-    "pug-cli": "^1.0.0-alpha6",
-    "shelljs": "^0.8.2",
-    "stylus": "^0.54.5"
+    "pug": "^2.0.3",
+    "stylus": "^0.54.5",
+    "terser": "^3.11.0"
   }
 }

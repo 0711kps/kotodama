@@ -1,6 +1,6 @@
 {
     "name": "kotodama",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "share your current thoughts or feeling on any web page.",
     "applications": {
         "gecko": {
@@ -11,7 +11,7 @@
     "background": {
         "scripts": ["js/third-js/firebase-app.js", "js/third-js/firebase-database.js", "js/firebase-config.js", "js/third-js/md5.min.js", "js/background.js"]
     },
-  "permissions": ["https://kotodama-0711.firebaseio.com/", "webRequest", "tabs", "storage", "<all_urls>"],
+    "permissions": ["https://kotodama-0711.firebaseio.com/", "webRequest", "tabs", "storage", "<all_urls>"],
     "icons": {
         "16": "images/logo-16.png",
         "32": "images/logo-32.png",
@@ -23,14 +23,19 @@
         "default_title": "kotodama",
         "default_popup": "html/popup.html"
     },
-  "web_accessible_resources": [
-    "css/kotodama.css"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "css": ["css/kotodama.css"]
-    }
-  ],
-  "manifest_version": 2
+    "web_accessible_resources": [
+        "css/kotodama.css"
+    ],
+    
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": ["css/kotodama.css"]
+        }
+    ],
+    "options_ui": {
+        "page": "html/options.html",
+        "browser_style": true
+    },
+    "manifest_version": 2
 }
