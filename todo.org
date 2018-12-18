@@ -1,7 +1,0 @@
-* TODO both FF and chrome can retrive json and show length beside icon
-* TODO both FF and chrome will update badge when change tab(page)
-* TODO both FF and chrome can send new kotodama from popup
-* TODO both FF and chrome get a kotodama container when click display button in the popup
-* TODO both FF and chrome run kotodama animation(simple linear)
-* TODO both FF and chrome run kotodama animation gracefully(beizer)
-* TODO both FF and chrome get a beautiful style set with stylus
