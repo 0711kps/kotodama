@@ -1,10 +1,12 @@
 const { watch, copyFile, writeFile, readFile } = require('fs')
-const { join, extname, basename } = require('path')
-const compileLS = require('livescript').compile
-const minifyJS = require('terser').minify
-const compilePug = require('pug').renderFile
-const compileStylus = require('stylus').render
-const minifyCSS = require('csso').minify
+const { extname, basename } = require('path')
+const { pathSplit,
+        compileLS,
+        minifyJS,
+        compilePug,
+        compileStylus,
+        minifyCSS,
+        minifyJSON} = require('./k-lib.js')
 
 
 const browserCheck = filePath => {
@@ -15,19 +17,17 @@ const browserCheck = filePath => {
   }
 }
 
-const pathSplit = filePath => {
-  let ext = extname(filePath)
-  let name = basename(filePath).replace(ext, '')
-  let unixPath = `src/${filePath.replace(/\\/g, '/')}`
-  return {ext: ext, name: name, unixPath: unixPath}
-}
-
 const handleManifest = filePath => {
-  let { ext, name, unixPath } = pathSplit(filePath)
-  let outputPath = `${browserCheck(filePath)}${name}${ext}`
-  copyFile(unixPath, outputPath, err => {
+  let { unixPath } = pathSplit(filePath)
+  let outputPath = `${browserCheck(filePath)}manifest.json`
+  let inputPath = 'src/' + filePath
+  readFile(inputPath, { encoding: 'utf-8'}, (err, data) => {
     if(err) throw err
-    console.log('manifest file copied!')
+    let jsonContent = minifyJSON(data)
+    writeFile(outputPath, jsonContent, err => {
+      if(err) throw err
+      console.log('manifest file copied!')
+    })
   })
 }
 
@@ -36,9 +36,8 @@ const handleLivescript = filePath => {
   let outputPath = `${browserCheck(filePath)}js/${name}.js`
   readFile(unixPath, { encoding: 'utf-8' }, (err, data) => {
     if(err) throw err
-    let lsContent = compileLS(data, { bare: true, header: false })
-    let lsContentMini = minifyJS(lsContent).code
-    writeFile(outputPath, lsContentMini, err => {
+    let lsContent = minifyJS(compileLS(data, { bare: true, header: false })).code
+    writeFile(outputPath, lsContent, err => {
       if(err) throw err
       console.log('livescript compiled!')
     })
@@ -66,10 +65,9 @@ const handleStylus = filePath => {
   let { name, unixPath } = pathSplit(filePath)
   readFile(unixPath, { encoding: 'utf-8'}, (err, data) => {
     if(err) throw err
-    let cssContent = compileStylus(data)
-    let cssContentMini = minifyCSS(cssContent).css
+    let cssContent = minifyCSS(compileStylus(data)).css
     dualPath('css').forEach(outputPath => {
-      writeFile(`${outputPath}${name}.css`, cssContentMini, err => {
+      writeFile(`${outputPath}${name}.css`, cssContent, err => {
         if(err) throw err
       })
     })
