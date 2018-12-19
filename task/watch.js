@@ -31,6 +31,22 @@ const handleManifest = filePath => {
   })
 }
 
+const handleLocaleMessages = filePath => {
+  let { unixPath } = pathSplit(filePath)
+  readFile(unixPath, { encoding: 'utf-8' }, (err, data) => {
+    if(err) throw err
+    let localeMessageContent = minifyJSON(data)
+    let browsers = ['chrome', 'firefox']
+    browsers.forEach(browser => {
+      let localeFilename = unixPath.replace('src/', '')
+      writeFile(`build/${browser}/${localeFilename}`, localeMessageContent, err => {
+        if(err) throw err
+      })
+    })
+  })
+  console.log('locales file copied!')
+}
+
 const handleLivescript = filePath => {
   let { name, unixPath } = pathSplit(filePath)
   let outputPath = `${browserCheck(filePath)}js/${name}.js`
@@ -83,6 +99,8 @@ watch('src', { recursive: true }, (event, filePath) => {
     handleFile = setTimeout(() => {
       if(filePath.includes('manifest.json')) {
         handleManifest(filePath)
+      }else if(filePath.includes('messages.json')) {
+        handleLocaleMessages(filePath)
       }else if(filePath.includes('ls')) {
         handleLivescript(filePath)
       }else if(filePath.includes('pug')) {

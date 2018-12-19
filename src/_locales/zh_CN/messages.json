@@ -1,0 +1,20 @@
+{
+    "extName": {
+        "message": "言弹"
+    },
+    "extDescription": {
+        "message": "在任何页面分享现在的想法和心情"
+    },
+    "greeting": {
+        "message": "你现在可以读取任意页面以获取言弹列表与发射言弹！"
+    },
+    "placeholderShort": {
+        "message": "按我"
+    },
+    "placeholderLong": {
+        "message": "输入言弹内容，ENTER键送出"
+    },
+    "emptyAlert": {
+        "message": "it's empty"
+    }
+}

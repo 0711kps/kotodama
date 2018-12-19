@@ -1,0 +1,20 @@
+{
+    "extName": {
+        "message": "言弾"
+    },
+    "extDescription": {
+        "message": "どこでも弾幕やろう！"
+    },
+    "greeting": {
+        "message": "ページをロードして、弾幕リストゲットできるぞ！"
+    },
+    "placeholderShort": {
+        "message": "押して"
+    },
+    "placeholderLong": {
+        "message": "弾幕を入力したあと、ENTERキーで発射する！"
+    },
+    "emptyAlert": {
+        "message": "it's empty"
+    }
+}

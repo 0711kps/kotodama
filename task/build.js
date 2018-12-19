@@ -14,7 +14,12 @@ let htmls = readdirSync('src/pug').map(pug => {
 })
 let csses = readdirSync('src/stylus').map(styl => {
   let stylContent = readFileSync(`src/stylus/${styl}`,{ encoding: 'utf-8' })
-  return { filename: styl.replace('.styl', '.css'), content: minifyCSS(compileStylus(stylContent)).css }
+  let cssContent = minifyCSS(compileStylus(stylContent)).css
+  return { filename: styl.replace('.styl', '.css'), content: cssContent }
+})
+let localeMessages = readdirSync('src/_locales').map(locale => {
+  let messagesContent = minifyJSON(readFileSync(`src/_locales/${locale}/messages.json`, { encoding: 'utf-8' }))
+  return { filename: `_locales/${locale}/messages.json`, content: messagesContent }
 })
 
 browsers.forEach(browser => {
@@ -25,6 +30,13 @@ browsers.forEach(browser => {
       console.log(`${browser} manifest file copied`)
     })
   })
+
+  localeMessages.forEach(localeMessage => {
+    writeFile(`build/${browser}/${localeMessage.filename}`, localeMessage.content, err => {
+      if(err) throw err
+    })
+  })
+  console.log(`${browser} locales file copied`)
   
   images.forEach(img => {
     copyFile(img.source, `build/${browser}/images/${img.filename}`, err => {
