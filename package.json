@@ -1,13 +1,11 @@
 {
   "name": "kotodama",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "share current thoughts or feeling on any web page.",
   "main": "index.js",
   "scripts": {
-    "watch": "node watch.js",
-    "build": "lsc task/build.ls",
-    "build-firefox": "lsc task/build.ls -firefox",
-    "build-chrome": "lsc task/build.ls -chrome"
+    "watch": "node task/watch.js",
+    "build": "node task/build.js"
   },
   "keywords": [],
   "author": "0711kps@gmail.com",

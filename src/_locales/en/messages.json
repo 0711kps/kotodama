@@ -1,0 +1,20 @@
+{
+    "extName": {
+        "message": "kotodama"
+    },
+    "extDescription": {
+        "message": "share your current thoughts or feeling on any web page."
+    },
+    "greeting": {
+        "message": "you can load any page and leave kotodama now!"
+    },
+    "placeholderShort": {
+        "message": "click"
+    },
+    "placeholderLong": {
+        "message": "your kotodama here"
+    },
+    "emptyAlert": {
+        "message": "it's empty"
+    }
+}

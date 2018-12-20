@@ -4,6 +4,7 @@ initialize-extension = !->
   browser.storage.local.clear
   extension-options = ng-list: false, colorful-kotodama: true
   browser.storage.local.set extension-options
+  browser.notifications.create({message: browser.i18n.get-message('greeting'), title: browser.i18n.get-message('extName'), type: 'basic', iconUrl: browser.extension.getURL("images/logo-48.png")})
 
 handle-kotodama-badge = (amount, tab-id) !->
   badge-str = amount.to-string!
@@ -32,8 +33,8 @@ handle-message = (req, sender, send-res) !->
 
 send-kotodama = (req, send-res) !->
   url-hash = md5 req.url
-  firebase.database!.ref(url-hash).push req.msg, (error) !->
-    if error
+  firebase.database!.ref(url-hash).push req.msg, (err) !->
+    if err
       console.log "something wrong happened!"
     else
       get-kotodama req.url, req.tab-id
