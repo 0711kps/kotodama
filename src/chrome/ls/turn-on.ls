@@ -12,5 +12,12 @@ set-timeout !->
 chrome.runtime.send-message type: 2
 get-msgs = (msgs) !->
   chrome.runtime.on-message.remove-listener get-msgs
-  console.log msgs
+  if msgs.length
+    console.log msgs
+  else
+    alert-div = document.create-element \div
+    alert-div.set-attribute \id, \empty-alert
+    alert-div.inner-text = chrome.i18n.get-message \emptyAlert
+    k-screen.append alert-div
+
 chrome.runtime.on-message.add-listener get-msgs
