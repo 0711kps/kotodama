@@ -15,6 +15,6 @@
         "message": "your kotodama here"
     },
     "emptyAlert": {
-        "message": "it's empty"
+        "message": "no kotodama yet :("
     }
 }

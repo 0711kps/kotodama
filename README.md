@@ -5,15 +5,7 @@ install dependencies with:
 ```
 npm install
 ```
-build for firefox with:
-```
-npm run build-firefox
-```
-build for chrome with:
-```
-npm run build-chrome
-```
-or build them all:
+build with:
 ```
 npm run build
 ```

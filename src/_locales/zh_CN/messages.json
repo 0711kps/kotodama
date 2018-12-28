@@ -15,6 +15,6 @@
         "message": "输入言弹内容，ENTER键送出"
     },
     "emptyAlert": {
-        "message": "it's empty"
+        "message": "还没有弹幕呦(´・ω・｀)"
     }
 }
