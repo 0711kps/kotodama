@@ -1,5 +1,15 @@
 bg-mask-color = hsla(0, 0%, 0%, 0.8)
 
+@keyframes flying-m
+  0%
+    transform: translateX(100vw)
+  15%
+    transform: translateX(59vw)
+  85%
+    transform: translateX(41vw)
+  100%
+    transform: translateX(-100%)
+
 .untouchable
   -moz-user-select: none
   -webkit-user-select: none
@@ -19,18 +29,24 @@ bg-mask-color = hsla(0, 0%, 0%, 0.8)
     background-color: bg-mask-color
   &.exist
     display: block
+    .kotodama
+      background-color: hsla(0, 0%, 0%, 0.6)
+      display: inline-block
+      position: fixed
+      transform: translateX(100vw)
+      will-change: transform
+      padding: .3em 1.2em .3em 2.2em
+      border-radius: 70% 20% 20% 70%
+      white-space: nowrap
+      animation-duration: 4s
+      animation-fill-mode: forwards
+      animation-timing-function: linear
+      &.flying
+        animation-name: flying-m
   #empty-alert
     color: hsl(0, 0%, 50%)
     margin-top: 50vh
     margin-left: 50vw
     transform: translate(-50%, -50%)
     font-size: 4.3em
-    white-space: nowrap
-  .kotodama
-    background-color: hsla(0, 0%, 0%, 0.6)
-    display: inline-block
-    position: fixed
-    left: 100vw
-    padding: .2em 1em .2em 2em
-    border-radius: 40% 10% 10% 40%
     white-space: nowrap
