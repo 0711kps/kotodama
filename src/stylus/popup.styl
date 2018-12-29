@@ -1,6 +1,6 @@
 body
   width: 380px
-  height: 52px
+  height: 64px
 .kotodama-switch
   cursor: pointer
   width: 12vw
@@ -36,3 +36,15 @@ body
     transform: translateX(0)
     margin-left: 0
     border-color: hsl(0, 0%, 10%)
+#length-alert
+  width: 380px
+  display: block
+  text-align: center
+  will-change: color
+  transition: color 200ms
+  &.safe
+    color: green
+  &.warning
+    color: orange
+  &.alert
+    color: red

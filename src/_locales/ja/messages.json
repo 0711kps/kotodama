@@ -16,5 +16,8 @@
     },
     "emptyAlert": {
         "message": "弾幕がまたねえぜ(・∀・)"
+    },
+    "lengthAlert": {
+        "message": "残ったバイトの数: "
     }
 }

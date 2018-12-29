@@ -16,5 +16,8 @@
     },
     "emptyAlert": {
         "message": "還沒有彈幕呦(´・ω・｀)"
+    },
+    "lengthAlert": {
+        "message": "剩餘的可輸入字元數: "
     }
 }

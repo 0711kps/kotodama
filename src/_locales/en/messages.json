@@ -16,5 +16,8 @@
     },
     "emptyAlert": {
         "message": "no kotodama yet :("
+    },
+    "lengthAlert": {
+        "message": "left available bytes: "
     }
 }

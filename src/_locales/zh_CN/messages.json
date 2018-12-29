@@ -16,5 +16,8 @@
     },
     "emptyAlert": {
         "message": "还没有弹幕呦(´・ω・｀)"
+    },
+    "lengthAlert": {
+        "message": "剩余的可输入字元数: "
     }
 }
