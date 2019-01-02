@@ -2,17 +2,21 @@ k-screen = document.get-element-by-id \kotodama-screen
 
 cal-time = (msg) ->
   len = new TextEncoder 'utf-8' .encode msg .length
-  basic-dur = Math.ceil document.body.get-client-rects!.0.width / 350
+  basic-dur = Math.ceil document.body.get-client-rects!.0.width / 300
   if len < 30
     dur = basic-dur
   else
     dur = basic-dur + (len-30) * 15 / 100
   dur: dur
-  delay: Math.floor(dur * Math.random! * 8 + 4) / 10
+  delay: Math.floor(dur * Math.random! * 19 + 4) / 10
 
 random-color = ->
   hue = (Math.floor(Math.random! * 15) * 24)
   "hsl(#{hue}, 100%, 70%)"
+
+random-size = ->
+  size-num = (Math.floor Math.random! * 2) + 1
+  "x#{size-num}"
 
 generate-kotodamas = (msgs) ->
   msgs.map (msg) ->
@@ -21,6 +25,7 @@ generate-kotodamas = (msgs) ->
     duration: dur
     delay: delay
     color: random-color!
+    size: random-size!
 
 init-rails = ->
   rail-height = Math.floor document.body.get-client-rects!.0.height / 10
@@ -33,7 +38,7 @@ fill-rails = (rails, kotodamas) ->
   while kotodamas.length
     next-kotodama = kotodamas.shift!
     (rails.sort (rail, next-rail) ->
-      rail.total-delay > next-rail.total-delay).0
+      rail.total-delay - next-rail.total-delay).0
         ..kotodamas.push next-kotodama
         ..total-delay += next-kotodama.delay
   rails.for-each (rail) !->
@@ -45,20 +50,22 @@ fill-rails = (rails, kotodamas) ->
 shoot-kotodama = (rail) !->
   k-attrs = rail.kotodamas.shift!
   kotodama = document.create-element \div
+  fly-type = (Math.floor Math.random! * 7) + 1
+  fly-motion = "flying-#{fly-type}"
   kotodama
     ..inner-text = k-attrs.text
-    ..class-list = 'untouchable kotodama'
+    ..class-list = "untouchable kotodama #{k-attrs.size}"
     ..style
       ..color = k-attrs.color
       ..top = "#{rail.pos-y}px"
       ..animation-duration = "#{k-attrs.duration}s"
   k-screen.append kotodama
   set-timeout !->
-    kotodama.class-list.add \flying-m
+    kotodama.class-list.add fly-motion
   , 100
-  ## set-timeout !->
-  ##   kotodama.remove!
-  ## , 100 + k-attrs.duration * 1000
+  set-timeout !->
+    kotodama.remove!
+  , 100 + k-attrs.duration * 1000
   if rail.kotodamas.length
     set-timeout !->
       shoot-kotodama rail
@@ -71,7 +78,7 @@ k-start = (msgs) !->
   filled-rails.for-each (rail) !->
     set-timeout !->
       shoot-kotodama rail
-    , 0
+    , (Math.floor Math.random! * 11) * 100
 
 if !k-screen
   k-screen = document.create-element \div
