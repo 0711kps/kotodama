@@ -34,14 +34,17 @@ bg-mask-color = hsla(0, 0%, 0%, 0.8)
       display: inline-block
       position: fixed
       transform: translateX(100vw)
+      font-size: 2em
       will-change: transform
       padding: .3em 1.2em .3em 2.2em
       border-radius: 70% 20% 20% 70%
+      border-width: 1px
+      border-color: gray
+      border-style: solid
       white-space: nowrap
-      animation-duration: 4s
       animation-fill-mode: forwards
       animation-timing-function: linear
-      &.flying
+      &.flying-m
         animation-name: flying-m
   #empty-alert
     color: hsl(0, 0%, 50%)

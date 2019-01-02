@@ -2,6 +2,7 @@ k-field = document.get-element-by-id \kotodama-field
 k-on = document.get-element-by-id \kotodama-on
 k-off = document.get-element-by-id \kotodama-off
 len-alert = document.get-element-by-id \length-alert
+k-len-limit = 50
 
 (!->
   k-field.placeholder = browser.i18n.get-message \placeholderShort)!
@@ -18,11 +19,11 @@ init-kotodama-switch = !->
 limit-length = (e) !->
   if e.key-code != 13
     set-timeout !->
-      available-len = 80 - new TextEncoder('utf-8').encode e.target.value .length
+      available-len = k-len-limit - new TextEncoder('utf-8').encode e.target.value .length
       len-alert.inner-text = browser.i18n.get-message(\lengthAlert) + available-len
-      if available-len >= 50
+      if available-len >= 20
         len-alert.class-name = \safe
-      else if available-len >= 20
+      else if available-len >= 10
         len-alert.class-name = \warning
       else
         len-alert.class-name = \alert
@@ -33,7 +34,7 @@ limit-length = (e) !->
     , 0
 
 send-kotodama = (e) !->
-  if e.key-code == 13 && new TextEncoder \utf-8 .encode e.target.value .length <= 80
+  if e.key-code == 13 && new TextEncoder \utf-8 .encode e.target.value .length <= k-len-limit
     e.target.set-attribute \disabled, true
     browser.tabs.query active: true, current-window: true , (tabs) !->
       url = tabs.0.url.replace /(https?:|[./#&?+=]|www)/g, ''
