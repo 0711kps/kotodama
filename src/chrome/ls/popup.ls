@@ -1,6 +1,8 @@
 k-field = document.get-element-by-id \kotodama-field
 k-on = document.get-element-by-id \kotodama-on
 k-off = document.get-element-by-id \kotodama-off
+len-alert = document.get-element-by-id \length-alert
+k-len-limit = 50
 
 (!->
   k-field.placeholder = chrome.i18n.get-message \placeholderShort)!
@@ -13,9 +15,26 @@ init-kotodama-switch = !->
         k-on.class-list.add \activated
       else
         k-off.class-list.add \activated
-        
+
+limit-length = (e) !->
+  if e.key-code != 13
+    set-timeout !->
+      available-len = k-len-limit - new TextEncoder('utf-8').encode e.target.value .length
+      len-alert.inner-text = chrome.i18n.get-message(\lengthAlert) + available-len
+      if available-len >= 20
+        len-alert.class-name = \safe
+      else if available-len >= 10
+        len-alert.class-name = \warning
+      else
+        len-alert.class-name = \alert
+      if available-len <= 0
+        e.target.set-attribute \disabled
+      else
+        e.target.remove-attribute \disabled
+    , 0
+
 send-kotodama = (e) !->
-  if e.key-code == 13
+  if e.key-code == 13 && new TextEncoder \utf-8' .encode e.target.value .length <= k-len-limit
     e.target.set-attribute \disabled, true
     chrome.tabs.query active: true, current-window: true , (tabs) !->
       url = tabs.0.url.replace /(https?:|[./#&?+=]|www)/g, ''
@@ -23,6 +42,7 @@ send-kotodama = (e) !->
         e.target.remove-attribute \disabled
         e.target.value = ''
         e.target.focus!
+        len-alert.inner-text = ''
 
 expand-field = (e) !->
   k-field.class-list.add \activated
@@ -45,6 +65,7 @@ toggle-kotodama-screen = (e) !->
         chrome.tabs.execute-script null, file: 'js/turn-on.js'
         
 k-field.add-event-listener \keypress, send-kotodama
+k-field.add-event-listener \keydown, limit-length
 k-field.add-event-listener \mousedown, expand-field
 k-on.add-event-listener \mousedown, toggle-kotodama-screen
 k-off.add-event-listener \mousedown, toggle-kotodama-screen

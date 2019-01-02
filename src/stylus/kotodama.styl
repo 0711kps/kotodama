@@ -1,12 +1,72 @@
 bg-mask-color = hsla(0, 0%, 0%, 0.8)
 
-@keyframes flying-m
+@keyframes flying-1
+  0%
+    transform: translateX(100vw)
+  6%
+    transform: translateX(67vw)
+  76%
+    transform: translateX(49vw)
+  100%
+    transform: translateX(-100%)
+
+@keyframes flying-2
+  0%
+    transform: translateX(100vw)
+  9%
+    transform: translateX(59vw)
+  79%
+    transform: translateX(41vw)
+  100%
+    transform: translateX(-100%)
+
+@keyframes flying-3
+  0%
+    transform: translateX(100vw)
+  12%
+    transform: translateX(51vw)
+  82%
+    transform: translateX(33vw)
+  100%
+    transform: translateX(-100%)
+
+@keyframes flying-4
   0%
     transform: translateX(100vw)
   15%
-    transform: translateX(59vw)
+    transform: translateX(43vw)
   85%
-    transform: translateX(41vw)
+    transform: translateX(25vw)
+  100%
+    transform: translateX(-100%)
+
+@keyframes flying-5
+  0%
+    transform: translateX(100vw)
+  18%
+    transform: translateX(35vw)
+  88%
+    transform: translateX(17vw)
+  100%
+    transform: translateX(-100%)
+
+@keyframes flying-6
+  0%
+    transform: translateX(100vw)
+  21%
+    transform: translateX(27vw)
+  91%
+    transform: translateX(9vw)
+  100%
+    transform: translateX(-100%)
+
+@keyframes flying-7
+  0%
+    transform: translateX(100vw)
+  24%
+    transform: translateX(19vw)
+  94%
+    transform: translateX(1vw)
   100%
     transform: translateX(-100%)
 
@@ -37,12 +97,35 @@ bg-mask-color = hsla(0, 0%, 0%, 0.8)
       will-change: transform
       padding: .3em 1.2em .3em 2.2em
       border-radius: 70% 20% 20% 70%
+      border-width: 2px
+      border-color: gray
+      border-style: solid
       white-space: nowrap
-      animation-duration: 4s
       animation-fill-mode: forwards
       animation-timing-function: linear
-      &.flying
-        animation-name: flying-m
+      &.flying-1
+        animation-name: flying-1
+      &.flying-2
+        animation-name: flying-2
+      &.flying-3
+        animation-name: flying-3
+      &.flying-4
+        animation-name: flying-4
+      &.flying-5
+        animation-name: flying-5
+      &.flying-6
+        animation-name: flying-6
+      &.flying-7
+        animation-name: flying-7
+      &.x1
+        font-size: 1.8em
+        z-index: 100
+      &.x2
+        font-size: 2.5em
+        z-index: 200
+      &.x3
+        font-size: 3.5em
+        z-index: 300
   #empty-alert
     color: hsl(0, 0%, 50%)
     margin-top: 50vh
