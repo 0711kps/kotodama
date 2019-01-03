@@ -2,7 +2,7 @@ k-field = document.get-element-by-id \kotodama-field
 k-on = document.get-element-by-id \kotodama-on
 k-off = document.get-element-by-id \kotodama-off
 len-alert = document.get-element-by-id \length-alert
-k-len-limit = 50
+k-len-limit = 60
 
 (!->
   k-field.placeholder = browser.i18n.get-message \placeholderShort)!
