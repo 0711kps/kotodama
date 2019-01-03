@@ -37,10 +37,10 @@ send-kotodama = (req, send-res) !->
     if err
       console.log "something wrong happened!"
     else
-      get-kotodama req.url, req.tab-id
+      get-kotodama req.url, req.tab-id, true
   send-res true
 
-get-kotodama = (url, tab-id) !->
+get-kotodama = (url, tab-id, display=false) !->
   url-hash = md5 url.replace /(https?:|[./#&?+=]|www)/g, ""
   firebase.database!.ref(url-hash).once \value .then (snapshot) !->
     msgs = snapshot.val!
@@ -51,7 +51,7 @@ get-kotodama = (url, tab-id) !->
       msgs-amount = msgs-arr.length
     handle-kotodama-badge msgs-amount, tab-id
     tab-info = {}
-    tab-obj = msgs: msgs-arr, display: false
+    tab-obj = msgs: msgs-arr, display: display
     tab-info[tab-id] = tab-obj
     browser.storage.local.set tab-info
 
