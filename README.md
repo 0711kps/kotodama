@@ -7,10 +7,14 @@ npm install
 ```
 build with:
 ```
-npm run build
+npm run build firefox
+```
+or:
+```
+npm run build chrome
 ```
 ### Load Extension
 ###### firefox
-> load the file build/firefox/manifest.json
+> load the file build/manifest.json
 ###### chrome
-> load the directory build/chrome
+> load the directory build

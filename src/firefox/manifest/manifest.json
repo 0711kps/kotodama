@@ -1,0 +1,37 @@
+{
+    "name": "__MSG_extName__",
+    "version": "1.0.0-rc",
+    "description": "__MSG_extDescription__",
+    "applications": {
+        "gecko": {
+            "id": "0711kps@gmail.com",
+            "strict_min_version": "60"
+        }
+    },
+    "background": {
+      "scripts": ["thirdjs/firebase-app.js", "thirdjs/firebase-database.js", "javascripts/firebase-config.js", "thirdjs/md5.min.js", "javascripts/browser-init.js", "javascripts/background.js"]
+    },
+    "permissions": ["https://kotodama-0711.firebaseio.com/", "webRequest", "tabs", "storage", "<all_urls>", "notifications"],
+    "icons": {
+        "16": "images/logo-16.png",
+        "32": "images/logo-32.png",
+        "48": "images/logo-48.png",
+        "128": "images/logo-128.png"
+    },
+    "browser_action": {
+        "default_icon": "images/logo-32.png",
+        "default_title": "__MSG_extName__",
+        "default_popup": "htmls/popup.html"
+    },
+    "web_accessible_resources": [
+        "csses/kotodama.css"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": ["csses/kotodama.css"]
+        }
+    ],
+    "default_locale": "zh_TW",
+    "manifest_version": 2
+}
