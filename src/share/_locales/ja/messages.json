@@ -19,5 +19,8 @@
     },
     "lengthAlert": {
         "message": "残ったバイトの数: "
+    },
+    "sendComplete": {
+        "message": "弾幕発射成功です"
     }
 }

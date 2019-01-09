@@ -19,5 +19,8 @@
     },
     "lengthAlert": {
         "message": "剩餘的可輸入字元數: "
+    },
+    "sendComplete": {
+        "message": "言彈已順利發射"
     }
 }
