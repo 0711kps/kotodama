@@ -19,5 +19,8 @@
     },
     "lengthAlert": {
         "message": "left available bytes: "
+    },
+    "sendComplete": {
+        "message": "kotodama sent successfully"
     }
 }

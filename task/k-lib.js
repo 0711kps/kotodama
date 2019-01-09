@@ -32,14 +32,14 @@ const handlers = {
     let scriptContent = minifyJS(compileLS(readFileSync(lsPath, { encoding: 'UTF-8' }), { bare: true, header: false })).code
     writeFile(`${targetDir}/${scriptName}`, scriptContent, sayErr(lsPath))
   },
-  _locales: localePath => {
-    let locale = basename(localePath)
-    let localeContent = minifyJSON(readFileSync(`${localePath}/messages.json`, { encoding: 'UTF-8' }))
+  _locales: messagesPath => {
+    let locale = messagesPath.split('/')[3]
+    let localeContent = minifyJSON(readFileSync(messagesPath, { encoding: 'UTF-8' }))
     let targetDir1 = 'build/_locales'
     let targetDir2 = `build/_locales/${locale}`
     mkdirIf(targetDir1)
     mkdirIf(targetDir2)
-    writeFile(`${targetDir2}/messages.json`, localeContent, sayErr(`${locale}/messages.json`))
+    writeFile(`${targetDir2}/messages.json`, localeContent, sayErr(messagesPath))
   },
   manifest: manifestPath => {
     let targetDir = 'build'

@@ -8,8 +8,8 @@ watch('src', { recursive: true }, (event, filePath) => {
     if(typeof preventDuplicateEvent !== 'undefined') clearTimeout(preventDuplicateEvent)
     preventDuplicateEvent = setTimeout(() => {
       formatedFilePath = `src/${filePath.replace(/\\/g, '/')}`
-      let lastFolder = dirname(formatedFilePath).split('/').reverse()[0]
-      handlers[lastFolder](formatedFilePath)
+      let handlerName = formatedFilePath.split('/')[2]
+      handlers[handlerName](formatedFilePath)
       console.log(`the change spotted: ${formatedFilePath}`)
     }, 200)
   }

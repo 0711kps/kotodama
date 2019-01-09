@@ -1,10 +1,6 @@
-## storage-get = (tab-id, func) !-->
-##   browser.storage.local.get "#{tab-id}" .then(func)
-## runtime-send-msg = (obj, func) !-->
-##   browser.runtime.send-message obj
-##     .then func
-
 k-screen = document.get-element-by-id \kotodama-screen
+
+timers = []
 
 cal-time = (msg) ->
   len = new TextEncoder 'UTF-8' .encode msg .length
@@ -63,14 +59,14 @@ shoot-kotodama = (rail) !->
       ..top = "#{rail.pos-y}px"
       ..animation-duration = "#{k-attrs.duration}s"
   k-screen.append kotodama
-  set-timeout !->
+  timers.push set-timeout !->
     kotodama.class-list.add fly-motion
   , 100
-  set-timeout !->
+  timers.push set-timeout !->
     kotodama.remove!
   , 100 + k-attrs.duration * 1000
   if rail.kotodamas.length
-    set-timeout !->
+    timers.push set-timeout !->
       shoot-kotodama rail
     , 100 + k-attrs.delay * 1000
 
@@ -79,7 +75,7 @@ k-start = (msgs) !->
   empty-rails = init-rails!
   filled-rails = fill-rails empty-rails, sorted-kotodamas
   filled-rails.for-each (rail) !->
-    set-timeout !->
+    timers.push set-timeout !->
       shoot-kotodama rail
     , (Math.floor Math.random! * 6) * 500
 

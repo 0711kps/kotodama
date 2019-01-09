@@ -49,7 +49,10 @@ send-kotodama = (e) !->
         e.target.remove-attribute \disabled
         e.target.value = ''
         e.target.focus!
-        len-alert.inner-text = ''
+        len-alert.inner-text = browser.i18n.get-message \sendComplete
+        set-timeout !->
+          len-alert.inner-text = ''
+        , 1000
 
 expand-field = (e) !->
   k-field.class-list.add \activated
