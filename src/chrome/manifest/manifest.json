@@ -1,6 +1,6 @@
 {
     "name": "__MSG_extName__",
-    "version": "1.0.0-rc",
+    "version": "1.0.0-rc2",
     "description": "__MSG_extDescription__",
     "background": {
       "scripts": ["thirdjs/firebase-app.js", "thirdjs/firebase-database.js", "javascripts/firebase-config.js", "thirdjs/md5.min.js", "javascripts/browser-init.js", "javascripts/background.js"],
