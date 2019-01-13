@@ -5,17 +5,16 @@ const compilePug = require('pug').renderFile
 const compileStylus = require('stylus').render
 const minifyCSS = require('csso').minify
 const minifyJSON = require('jsonminify')
-const sayErr = filePath => err => { if(err) throw(`error with ${filePath}`) }
-const mkdirIf = dirPath => { if(!existsSync(dirPath)) mkdirSync(dirPath) }
-const handleFile = handler => file => handler(file)
+const sayErr = filePath => err => { if (err) throw (`error with ${filePath}`) }
+const mkdirIf = dirPath => { if (!existsSync(dirPath)) mkdirSync(dirPath) }
 const shareRoot = 'src/share'
-const { copyFile, writeFile, readFile, readFileSync, readdir, readdirSync, existsSync, mkdirSync } = require('fs')
+const { copyFile, writeFile, readFileSync, readdirSync, existsSync, mkdirSync } = require('fs')
 
 const pathSplit = filePath => {
   let ext = extname(filePath)
   let name = basename(filePath).replace(ext, '')
   let unixPath = `src/${filePath.replace(/\\/g, '/')}`
-  return {ext: ext, name: name, unixPath: unixPath}
+  return { ext: ext, name: name, unixPath: unixPath }
 }
 
 const handlers = {
@@ -34,7 +33,7 @@ const handlers = {
   },
   _locales: messagesPath => {
     let locale = messagesPath.split('/')[3]
-    let localeContent = minifyJSON(readFileSync(messagesPath, { encoding: 'UTF-8' }))
+    let localeContent = minifyJSON(readFileSync(`${messagesPath}/messages.json`, { encoding: 'UTF-8' }))
     let targetDir1 = 'build/_locales'
     let targetDir2 = `build/_locales/${locale}`
     mkdirIf(targetDir1)
@@ -58,7 +57,7 @@ const handlers = {
     let fileName = basename(stylPath).replace('.styl', '.css')
     let cssContent = minifyCSS(
       compileStylus(
-        readFileSync(stylPath, { encoding: 'UTF-8'})
+        readFileSync(stylPath, { encoding: 'UTF-8' })
       )
     ).css
     let targetDir = 'build/csses'
@@ -77,7 +76,7 @@ const handleShare = () => {
   console.log('building common part of extension...')
   readdirSync(shareRoot).forEach(dir => {
     readdirSync(`${shareRoot}/${dir}`).forEach(target => {
-      if(handlers[dir]) handlers[dir](`${shareRoot}/${dir}/${target}`)
+      if (handlers[dir]) handlers[dir](`${shareRoot}/${dir}/${target}`)
     })
   })
   console.log('common part built')
@@ -88,10 +87,10 @@ const handleBrowser = (browser) => {
   let browserRoot = `src/${browser}`
   readdirSync(browserRoot).forEach(dir => {
     readdirSync(`${browserRoot}/${dir}`).forEach(target => {
-      if(handlers[dir]) handlers[dir](`${browserRoot}/${dir}/${target}`)
+      if (handlers[dir]) handlers[dir](`${browserRoot}/${dir}/${target}`)
     })
   })
   console.log(`${browser} part built`)
 }
 
-module.exports =  { pathSplit, compileLS, minifyJS, compilePug, compileStylus, minifyCSS, minifyJSON, handlers, handleShare, handleBrowser }
+module.exports = { pathSplit, compileLS, minifyJS, compilePug, compileStylus, minifyCSS, minifyJSON, handlers, handleShare, handleBrowser }
