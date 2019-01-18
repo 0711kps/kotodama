@@ -2,6 +2,7 @@ k-field = document.get-element-by-id \kotodama-field
 k-on = document.get-element-by-id \kotodama-on
 k-off = document.get-element-by-id \kotodama-off
 len-alert = document.get-element-by-id \length-alert
+browser = if typeof browser == 'undefined' then chrome else browser
 k-len-limit = 100
 
 toggle-switch = (target, status) !-->
@@ -59,6 +60,7 @@ expand-field = (e) !->
   k-field.placeholder = browser.i18n.get-message \placeholderLong
   set-timeout !->
     k-field.focus!
+    k-field.style.background-image = "url(#{browser.extension.getURL \images/enter_key.png})"
   , 500
 
 toggle-kotodama-screen = (e) !->
