@@ -92,15 +92,15 @@ bg-mask-color = hsla(0, 0%, 0%, 0.8)
     .kotodama
       background-color: hsla(0, 0%, 0%, 0.6)
       display: inline-block
+      max-width: 33vw
       position: fixed
       transform: translateX(100vw)
       will-change: transform
-      padding: .3em 1.2em .3em 2.2em
+      padding: .5em 1.3em .5em 2.3em
       border-radius: 70% 20% 20% 70%
       border-width: 2px
       border-color: gray
       border-style: solid
-      white-space: nowrap
       animation-fill-mode: forwards
       animation-timing-function: linear
       &.flying-1
@@ -118,14 +118,20 @@ bg-mask-color = hsla(0, 0%, 0%, 0.8)
       &.flying-7
         animation-name: flying-7
       &.x1
-        font-size: 1.8em
+        font-size: 2vh
         z-index: 100
       &.x2
-        font-size: 2.5em
+        font-size: 3.2vh
         z-index: 200
       &.x3
-        font-size: 3.5em
+        font-size: 4.4vh
         z-index: 300
+      &.x4
+        font-size: 5.6vh
+        z-index: 400
+      &.x5
+        font-size: 6.8vh
+        z-index: 500
   #empty-alert
     color: hsl(0, 0%, 50%)
     margin-top: 50vh

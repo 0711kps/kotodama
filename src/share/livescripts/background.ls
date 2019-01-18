@@ -1,5 +1,7 @@
 firebase.initialize-app config
 
+k-len-limit = 100
+
 initialize-extension = !->
   browser.storage.local.clear
   noti-obj =
@@ -43,13 +45,16 @@ handle-message = (req, sender, send-res) !->
       browser.tabs.send-message sender.tab.id, obj[sender.tab.id].msgs)
 
 send-kotodama = (req, send-res) !-->
-  url-hash = md5 req.url
-  firebase.database!.ref url-hash .push req.msg, (err) !->
-    if err
-      console.log "something wrong happened!"
-    else
-      get-kotodama(req.url)(req.tab-id)(false)
-  send-res true
+  if new TextEncoder \UTF-8 .encode req.msg .length <= k-len-limit
+    url-hash = md5 req.url
+    firebase.database!.ref url-hash .push req.msg, (err) !->
+      if err
+        console.log "something wrong happened!"
+      else
+        get-kotodama(req.url)(req.tab-id)(false)
+    send-res true
+  else
+    send-res false
 
 get-kotodama = (url, tab-id, reset-status) !-->
   url-hash = md5 url.replace /(https?:|[./#&?+=]|www)/g, ''

@@ -13,8 +13,14 @@ random-color = ->
   hue = Math.floor(Math.random! * 15) * 24
   "hsl(#{hue}, 100%, 70%)"
 
-random-size = ->
-  size-num = (Math.floor Math.random! * 2) + 1
+get-size = (msg) ->
+  len = new TextEncoder 'UTF-8' .encode msg .length
+  size-num = if len > 66
+    (Math.floor Math.random! * 2) + 1
+  else if len > 33
+    3
+  else
+    (Math.floor Math.random! * 2) +  4
   "x#{size-num}"
 
 generate-kotodamas = (msgs) ->
@@ -24,7 +30,7 @@ generate-kotodamas = (msgs) ->
     duration: dur
     delay: delay
     color: random-color!
-    size: random-size!
+    size: get-size msg
 
 init-rails = ->
   rail-height = Math.floor window.inner-height / 10
