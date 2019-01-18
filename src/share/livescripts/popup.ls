@@ -2,7 +2,7 @@ k-field = document.get-element-by-id \kotodama-field
 k-on = document.get-element-by-id \kotodama-on
 k-off = document.get-element-by-id \kotodama-off
 len-alert = document.get-element-by-id \length-alert
-k-len-limit = 60
+k-len-limit = 100
 
 toggle-switch = (target, status) !-->
   if status
@@ -24,9 +24,9 @@ limit-length = (e) !->
     set-timeout !->
       available-len = k-len-limit - new TextEncoder 'UTF-8' .encode e.target.value .length
       len-alert.inner-text = "#{browser.i18n.get-message \lengthAlert}#{available-len}"
-      len-alert.class-name = if available-len >= 35
+      len-alert.class-name = if available-len >= 50
         \safe
-      else if available-len >= 20
+      else if available-len >= 30
         \warning
       else
         \alert
