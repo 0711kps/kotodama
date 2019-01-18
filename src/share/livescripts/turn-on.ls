@@ -5,7 +5,7 @@ timers = []
 cal-time = (msg) ->
   len = new TextEncoder 'UTF-8' .encode msg .length
   basic-dur = Math.ceil window.inner-width / 280
-  dur = basic-dur + if len < 30 then 0 else (len-30) * 15 / 100
+  dur = basic-dur + if len < 30 then 0 else (len-30) * 25 / 100
   dur: dur
   delay: Math.floor(dur * Math.random! * 9 + 9) / 10
 
