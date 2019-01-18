@@ -60,7 +60,6 @@ expand-field = (e) !->
   k-field.placeholder = browser.i18n.get-message \placeholderLong
   set-timeout !->
     k-field.focus!
-    k-field.style.background-image = "url(#{browser.extension.getURL \images/enter_key.png})"
   , 500
 
 toggle-kotodama-screen = (e) !->
@@ -80,7 +79,9 @@ toggle-kotodama-screen = (e) !->
       browser.tabs.execute-script null, file: "/javascripts/turn-#{target-status}.js")
 
 (!->
-  k-field.placeholder = browser.i18n.get-message \placeholderShort)!
+  k-field.placeholder = browser.i18n.get-message \placeholderShort
+  len-alert.style.background-image = "url(#{browser.extension.getURL \images/enter_key.png})"
+)!
 
 k-field.add-event-listener \keypress, send-kotodama
 k-field.add-event-listener \keydown, limit-length
