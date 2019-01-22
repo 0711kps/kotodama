@@ -33,7 +33,7 @@ const handlers = {
   },
   _locales: messagesPath => {
     let locale = messagesPath.split('/')[3]
-    let localeContent = minifyJSON(readFileSync(`${messagesPath}/messages.json`, { encoding: 'UTF-8' }))
+    let localeContent = minifyJSON(readFileSync(messagesPath, { encoding: 'UTF-8' }))
     let targetDir1 = 'build/_locales'
     let targetDir2 = `build/_locales/${locale}`
     mkdirIf(targetDir1)
