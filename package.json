@@ -11,6 +11,7 @@
   "author": "0711kps@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "chokidar": "^2.0.4",
     "csso": "^3.5.1",
     "jsonminify": "^0.4.1",
     "livescript": "^1.6.0",
